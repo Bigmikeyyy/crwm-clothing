@@ -4,6 +4,8 @@ import storage from 'redux-persist/lib/storage';
 
 import userReducer from './user/user-reducer';
 import cartReducer from './cart/cart-reducer';
+import directoryReducer from './directory/directory-reducer';
+import shopReducer from './shop/shop-reducer';
 
 //whiteList - the only reducers we want to persist (hold)
 //storage - storage(sessionStorage)
@@ -15,7 +17,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
    user: userReducer,
-   cart: cartReducer
+   cart: cartReducer,
+   directory: directoryReducer,
+   shop: shopReducer
 });
 
 export default persistReducer(persistConfig, rootReducer);
