@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { ReactComponent as Logo } from '../../assets/crown.svg';
@@ -10,39 +9,40 @@ import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { selectCartHidden } from '../../redux/cart/cart-selector';
 import { selectCurrentUser } from '../../redux/user/user-selector';
 
-import './header.scss';
+import { HeaderContainer, LogoContainer, HeaderItemsContainer, HeaderDiv, HeaderLink} from './header.styles';
 
 
 const Header = ({ currentUser, hidden }) => (
-   <div className='header'>
-      <Link className='logo-container' to='/'>
+   <HeaderContainer>
+      <LogoContainer to='/'>
          <Logo className='logo' />
-      </Link>
-      <div className='header-items'>
-         <Link className='header-item' to='/shop'>
+      </LogoContainer>
+      <HeaderItemsContainer>
+         <HeaderLink to='/shop'>
             SHOP
-         </Link>
-         <Link className='header-item' to='/shop'>
+         </HeaderLink>
+         <HeaderLink to='/shop'>
             CONTACT
-         </Link>
+         </HeaderLink>
          {
             currentUser ?
-               <div
+               <HeaderLink
+                  as='div'
                   className='header-item'
                   onClick={() => auth.signOut()}>
                   SIGN OUT
-               </div>
+               </HeaderLink>
                :
-               <Link className='header-item' to='/signin'>
+               <HeaderLink className='header-item' to='/signin'>
                   SIGN IN
-               </Link>
+               </HeaderLink>
          }
          <CartIcon />
-      </div>
+      </HeaderItemsContainer>
       {
          hidden ? null :<CartDropdown />
       }
-   </div>
+   </HeaderContainer>
 );
 
 const mapStateToProps = createStructuredSelector({

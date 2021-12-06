@@ -15,7 +15,7 @@ const Directory = ({ sections }) => (
             <MenuItem
                key={id} {...sectionProps}
             />
-         ))}
+         ))
       }
    </div>
 );
