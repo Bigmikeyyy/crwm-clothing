@@ -9,7 +9,7 @@ import CartDropdown from '../cart-dropdown/cart-dropdown';
 import { selectCartHidden } from '../../redux/cart/cart-selector';
 import { selectCurrentUser } from '../../redux/user/user-selector';
 
-import { HeaderContainer, LogoContainer, HeaderItemsContainer, HeaderDiv, HeaderLink} from './header.styles';
+import { HeaderContainer, LogoContainer, HeaderItemsContainer, HeaderLink} from './header.styles';
 
 
 const Header = ({ currentUser, hidden }) => (

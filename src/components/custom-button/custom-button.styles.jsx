@@ -8,6 +8,7 @@ const buttonStyles = css`
   &:hover {
     background-color: white;
     color: black;
+    display: flex;
     border: 1px solid black;
   }
 `;
@@ -20,6 +21,7 @@ const invertedButtonStyles = css`
     background-color: black;
     color: white;
     border: none;
+    display: flex;
   }
 `;
 
