@@ -1,10 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import FormInput from '../form-input/form-input';
 import CustomButton from '../custom-button/custom-button';
 
-import { signInWithGoogle } from '../../firebase/firebase';
-import { auth } from '../../firebase/firebase';
+import { googleSignInStart, emailSignInStart } from '../../redux/user/user-actions';
 import './sign-in.scss';
 
 class SignIn extends React.Component {
@@ -19,19 +19,10 @@ class SignIn extends React.Component {
 
    handleSubmit = async event => {
       event.preventDefault();
+      const { emailSignInStart } = this.props;
+      const { email, password } = this.state;
 
-      const{ email, password } = this.state;
-
-      try {
-         await auth.signInWithEmailAndPassword(email, password);
-
-         this.setState({
-            email: '',
-            password: ''
-         });
-      } catch(err) {
-         console.log(err.message)
-      }
+      emailSignInStart(email, password);
    };
 
    handleChange = event => {
@@ -43,6 +34,7 @@ class SignIn extends React.Component {
    };
 
    render() {
+      const { googleSignInStart } = this.props;
       return(
          <div className='sign-in'>
             <h2 className='title'>I already have an account</h2>
@@ -66,7 +58,7 @@ class SignIn extends React.Component {
                />
                <div className='sign-in-buttons'>
                   <CustomButton type='submit'> Sign in </CustomButton>
-                  <CustomButton onClick={signInWithGoogle} isGoogleSign>
+                  <CustomButton type='button' onClick={googleSignInStart} isGoogleSign>
                      {' '} Sign in with Google {' '}
                   </CustomButton>
                </div>
@@ -76,4 +68,9 @@ class SignIn extends React.Component {
    }
 }
 
-export default SignIn;
+const mapDispatchToProps = dispatch => ({
+   googleSignInStart: () => dispatch(googleSignInStart()),
+   emailSignInStart: (email, password) => dispatch(emailSignInStart({ email, password }))
+});
+
+export default connect(null, mapDispatchToProps)(SignIn);
